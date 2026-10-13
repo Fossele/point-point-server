@@ -9,7 +9,7 @@ export const handleSocket = (io) =>{
         socket.join(room);
         console.log(socket.id, "joined room:", room);
         socket.on("game.point-capture", (message) => {
-            console.log(`made move on row ${message.point.r}- col ${message.point.c}`);
+            console.log(`made move by ${message.currentPlayer}`);
             io.to(room).emit("game.point-capture",  message)
         });
 

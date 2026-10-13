@@ -11,6 +11,7 @@ import createToken from "../utils/createToken.js";
 
 const register = async (req, res) => {
     try {
+        console.log(req)
         const { username, email, password } = req.body;
         if (!username || !email || !password) {
             return res.status(404).json({ message: "username, password or email is missing." });
@@ -27,7 +28,7 @@ const register = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(501).json({ message: 'Internal server error' });
     }
 }
 
@@ -61,7 +62,9 @@ const login = async (req, res) => {
             sameSite: "strict"
         });
 
-        return res.status(200).json({ message: 'User successfully logged in.', success: true });
+        return res.status(200).json({ message: 'User successfully logged in.', data: {
+            token: token
+        }, success: true });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error' })
