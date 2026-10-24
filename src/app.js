@@ -2,7 +2,7 @@
 import express from "express";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
-import { handleSocket } from "./socket.js";
+import { handleGameSocket} from "./socket.js";
 import userRouter from "./routes/user.route.js";
 import cors from "cors";
 import { notFound } from "./middlewares/notFound.js";
@@ -30,6 +30,6 @@ const io = new Server(server, {
  }
 );
 
-handleSocket(io);
+handleGameSocket(io);
 
 export { server as app }
