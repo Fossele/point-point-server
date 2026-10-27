@@ -1,9 +1,11 @@
-const evaluateAdjacentSquares = (vr, vc, currentVerts, currentSquares, player) => {
-    // This function evaluates the squares adjacent to a given vertex and determines if any are claimed or blocked.
+const GRID_SIZE = 30; // Assuming a 30x30 grid for the game
 
+
+export function evaluateAdjacentSquares(vr, vc, currentVerts, currentSquares, player) {
     let claimedCount = 0;
     let blockedCount = 0;
     const updatedSquares = currentSquares.map(row => [...row]);
+    const newlyCaptured = [];
 
     const candidates = [
         { r: vr - 1, c: vc - 1 },
@@ -24,7 +26,7 @@ const evaluateAdjacentSquares = (vr, vc, currentVerts, currentSquares, player) =
                     if (c1 === c2 && c2 === c3 && c3 === c4) {
                         updatedSquares[r][c] = player;
                         claimedCount++;
-                        handleBoxCaptured(r, c, player);
+                        newlyCaptured.push({ r, c, player });
                     } else {
                         updatedSquares[r][c] = -1;
                         blockedCount++;
@@ -34,5 +36,5 @@ const evaluateAdjacentSquares = (vr, vc, currentVerts, currentSquares, player) =
         }
     });
 
-    return { updatedSquares, claimedCount, blockedCount };
-};
+    return { updatedSquares, claimedCount, blockedCount, newlyCaptured };
+}
