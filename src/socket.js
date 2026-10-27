@@ -190,7 +190,7 @@ export function handleGameSocket(io) {
             
 
 
-            const { updatedSquares, claimedCount, newlyCaptured } = evaluateAdjacentSquares(
+            const {  claimedCount } = evaluateAdjacentSquares(
                 r,
                 c,
                 game.vertices,
